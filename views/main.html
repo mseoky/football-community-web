@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <div class="board">
+        <div class="bg-white p-4 rounded-lg shadow-md mb-4">
+            <div class="flex justify-between items-center mb-4">
+                <div>
+                    <button class="bg-blue-500 text-white py-1 px-3 rounded" onclick="redirectToHome()">전체 글 보기</button>
+                </div>
+                <div>
+                    <form id="search" action="/search">
+                        <input type="search" name="search" placeholder="제목 검색" class="border p-2 rounded">
+                        <button class="bg-blue-500 text-white py-1 px-3 rounded ml-2">검색</button>
+                    </form>
+                </div>
+            </div>
+            {% if list.length > 0 %}
+                <table class="w-full text-left">
+                    <thead>
+                        <tr>
+                            <th class="pb-2">작성자</th>
+                            <th class="pb-2">제목</th>
+                            <th class="pb-2">조회</th>
+                            <th class="pb-2">작성일</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in list %}
+                            <tr>
+                                <td>{{ item.userNick }}</td>
+                                <td><a href="/view/{{ item.id }}">{{ item.subject }}</a></td>
+                                <td>{{ item.hit }}</td>
+                                <td>{{ item.createdAt.toLocaleString('ko-KR', {
+                                        year: 'numeric',
+                                        month: '2-digit',
+                                        day: '2-digit',
+                                        hour: '2-digit',
+                                        minute: '2-digit',
+                                        hour12: false
+                                    }) }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>일치하는 제목이 없습니다.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        function redirectToHome() {
+            window.location.href = '/';
+        }
+    </script>
+{% endblock %}

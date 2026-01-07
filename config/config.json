@@ -1,0 +1,8 @@
+{
+  "development": {
+    "username": "YOUR_DB_USER",
+    "password": "YOUR_DB_PASSWORD",
+    "database": "football_cafe",
+    "host": "127.0.0.1"
+  }
+}

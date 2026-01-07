@@ -1,0 +1,118 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+  {% if user %}
+    <div class="edit">
+      <form id="edit-form" action="/post/edit/{{ post.id }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="postId" value="{{ post.id }}">
+        <div class="mb-3">
+          <label for="edit-subject" class="form-label">제목: </label>
+          <input type="text" class="form-control" placeholder="제목을 입력해주세요." name="subject" value="{{ post.subject }}">
+        </div>
+        <div>{{'작성자: ' + user.nick}}</div>
+        <div class="input-group">
+          <label for="edit-content" class="form-label">내용: </label>
+          <textarea id="content" name="content" maxlength="300" placeholder="내용을 입력해주세요." style="height: 150px;">{{ post.content }}</textarea>
+        </div>
+        <div class="upload-section">
+            <label id="img-label" for="img">사진 업로드</label>
+            <input id="img" type="file" accept="image/*">
+            <input type="hidden" name="img" id="img-url" value="{{ post.img }}">
+            <input type="hidden" name="postId" value="{{ post.id }}">
+            <button id="edit-btn" type="submit" class="edit-btn">수정완료</button>
+        </div>
+      </form>
+    </div>
+  {% endif %}
+    <style>
+
+        .edit {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .img-preview {
+            margin-bottom: 15px;
+        }
+
+        .upload-section {
+            display: flex;
+            align-items: center;
+        }
+
+        #img-label {
+            width: 150px;
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 8px;
+            background-color: #3498db;
+            color: #fff;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        #img-label:hover {
+            background-color: #2980b9;
+        }
+
+        #edit-btn {
+            width: 150px;
+            display: inline-block;
+            padding: 8px 8px;
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #edit-btn:hover {
+            background-color: #27ae60;
+        }
+
+        textarea {
+            height: 150px;
+        }
+    </style>
+{% endblock %}
+
+{% block script %}
+    <script>
+      // 이미지를 업로드, 해당 이미지에 대한 미리보기 및 URL을 표시
+      if (document.getElementById('img')) {
+      document.getElementById('img').addEventListener('change', function(e) {
+        const formData = new FormData();
+        console.log(this, this.files);
+        formData.append('img', this.files[0]);
+        axios.post('/post/img', formData)
+          .then((res) => {
+            document.getElementById('img-url').value = res.data.url;
+            document.getElementById('img-preview').src = res.data.url;
+            document.getElementById('img-preview').style.display = 'inline';
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      });
+    }  
+    </script>
+{% endblock %}
