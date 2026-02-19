@@ -1,4 +1,4 @@
-# Football Community - Pusan National University Coursework
+# Football Community - Full-stack Web Service
 
 > **Note:** This project was developed as a term project for the **'Web Application Programming'** course during my **Freshman 2nd Semester (2023)**. 
 > (본 프로젝트는 1학년 2학기 '웹응용프로그래밍' 과목의 텀 프로젝트로 제작되었습니다. 당시 학습한 백엔드 기초 역량을 기록하기 위한 아카이브입니다.)
