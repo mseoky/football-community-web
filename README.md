@@ -2,7 +2,7 @@
 
 > **Note:** This project was developed for the 'Web Application Programming' course at Pusan National University (Freshman 2nd Semester, 2023).
 
-## 📺 시현 영상 (Demo Video)
+## 📺 시연 영상 (Demo Video)
 [![Community Demo](https://img.youtube.com/vi/Ng9taqQ3Phw/0.jpg)](https://youtu.be/Ng9taqQ3Phw)
 
 ## 📌 개요 (Overview)
